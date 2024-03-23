@@ -1,0 +1,4 @@
+img{
+    width: 400px;
+    height: 500px; /* Since all the images used are in 4:5 aspect ratio */
+}
