@@ -10,22 +10,24 @@ body{
     top: 0;
     left: 0;
     z-index: -1;
-    filter: blur(8px);
+    filter: blur(10px);
     background-image: url('pics/background.jpg');
     background-size: cover; /* ensures the background image covers the entire container */
     background-position: center; /* centers the background image */
 }
     
-
 #allTogether{
     background: linear-gradient(135deg, hsl(230, 40%, 12%), hsl(230, 20%, 7%));
     margin: auto;
-    border-style: dashed;
+    border: 5px;
+    border-style: double;
     border-color: blueviolet;
-    width: 1000px;
+    width: 600px;
     height: 700px;
 }
 
+
+/*-------------------------------IMAGES-------------------------------*/
 #imgContainer{
     margin: auto; /*centers everything*/
 }
@@ -52,8 +54,10 @@ body{
     opacity: 1; /* Show active image */
 }
 
-#select { /*without this it won't center*/
-    display: flex;
+
+/*-------------------------------BUTTONS-------------------------------*/
+#select { 
+    display: flex; /*without these it won't center*/
     flex-direction: column;
     align-items: center;
 }
@@ -67,14 +71,16 @@ select{
     margin-bottom: 10px; /* Adds some space between the select and the button */
 }
 
-button{
-    background-color: #baacac;
+#continueButton{
+    background-color: #666666;
     border: 1px solid #38276f;
     padding: 5px 10px;
     border-radius: 5px;
     cursor: pointer;
+    color: black; /* font color */
 }
 
+/*-------------------------------Headings & animations-------------------------------*/
 h2 {
     text-align: center;
     font-size: 30px;
@@ -134,9 +140,9 @@ h2 {
     font-family: "Luckiest Guy", cursive;
     margin: 0;
     font-size: 4em;
-    padding: 0;
+    margin-bottom: 23px;
     text-align: center;
-    color: rgb(14, 39, 164);
+    color: rgb(221, 231, 229);
     span {
       transform: scale(0.9);
       display: inline-block;
@@ -170,6 +176,3 @@ h2 {
       transform: scale(1) rotateZ(-3deg);
     }
   }
-
-
-
