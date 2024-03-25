@@ -24,3 +24,22 @@ function selectMovie() {
     continueButton.style.backgroundColor = selectBox.value === "" ? "" : "azure";
 }
 
+//Popup window
+const continueButton = document.getElementById('continueButton');
+const popup = document.getElementById('popup');
+const closeButton = document.getElementById('closeButton');
+// Function to display the popup
+function displayPopup() {
+    popup.style.display = 'block';
+}
+
+// Function to close the popup
+function closePopup() {
+    popup.style.display = 'none';
+}
+
+// Event listener for the continue button
+continueButton.addEventListener('click', displayPopup);
+
+// Event listener for the close button inside the popup
+closeButton.addEventListener('click', closePopup);
