@@ -11,6 +11,7 @@
     <h1><span>Show</span><span>Time!</span></h1>
 <div id="allTogether">
     <h2>Now Premiering/Ongoing</h2>
+
     <div id="imgContainer" class="gallery">
         <img src="pics/SwordArtOnline.jpg">
         <img src="pics/Interstellar.jpg">
@@ -18,6 +19,20 @@
         <img src="pics/GraveOfTheFireflies.jpg">
         <img src="pics/BladeRunner.jpg">
         <img src="pics/Oppenheimer.jpg">
+    </div>
+
+    <div id="select">
+     <!-- Select button -->
+     <label for="selectMovie">Select Movie</label>
+     <select id="selectMovie" onchange="selectMovie()">
+     <option value="" disabled selected>Select Movie</option>
+     <option value="Avengers">Sword Art Online</option>
+     <option value="The Dark Knight">Interstellar</option>
+     <option value="Inception">KungFu Panda 4</option>
+     <option value="Interstellar">Grave Of The Fireflies</option>
+     <option value="Interstellar">Blade Runner</option>
+     <option value="Interstellar">Oppenheimer</option>
+     </select>
     </div>
 </div>
     <script src="script.js"></script>

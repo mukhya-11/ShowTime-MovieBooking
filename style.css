@@ -3,8 +3,6 @@ body{
     padding: 20px;
 }
 
-
-
 #allTogether{
     background: linear-gradient(135deg, hsl(230, 40%, 12%), hsl(230, 20%, 7%));
     margin: auto;
@@ -40,14 +38,26 @@ body{
     opacity: 1; /* Show active image */
 }
 
+#select{
+}
+
+select {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    align-items: center;
+}
+
 h2 {
     text-align: center;
     font-size: 30px;
     font-weight: 300;
-    animation: lights 5s 750ms linear infinite;
+    animation: glow 5s 750ms linear infinite;
   }
 
-@keyframes lights {
+@keyframes glow {
     0% {
       color: hsl(230, 40%, 80%);
       text-shadow:
@@ -98,7 +108,7 @@ h2 {
   h1 {
     font-family: "Luckiest Guy", cursive;
     margin: 0;
-    font-size: 8em;
+    font-size: 4em;
     padding: 0;
     color: rgb(156, 27, 27);
     text-shadow: 0 0.1em 20px rgba(0, 0, 0, 1), 0.05em -0.03em 0 rgba(0, 0, 0, 1),
@@ -110,16 +120,16 @@ h2 {
       display: inline-block;
     }
     span:first-child {
-      animation: bop 1s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards infinite
+      animation: enlarge 1s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards infinite
         alternate;
     }
     span:last-child {
-      animation: bopB 1s 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards
+      animation: enlarge2 1s 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards
         infinite alternate;
     }
   }
   
-  @keyframes bop {
+  @keyframes enlarge {
     0% {
       transform: scale(0.9);
     }
@@ -129,7 +139,7 @@ h2 {
     }
   }
   
-  @keyframes bopB {
+  @keyframes enlarge2 {
     0% {
       transform: scale(0.9);
     }
@@ -138,3 +148,6 @@ h2 {
       transform: scale(1) rotateZ(-3deg);
     }
   }
+
+
+
