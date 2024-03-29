@@ -2,15 +2,35 @@
 document.addEventListener('DOMContentLoaded', function() {
     let images = document.querySelectorAll('.gallery img');
     let index = 0;
+    let fadeDuration = 300; // Duration of fade animation in ms
 
     function showImage() {
-        images.forEach(img => img.classList.remove('active'));
-        images[index].classList.add('active');
-        index = (index + 1) % images.length; // Cycle through images
+        let currentIndex = index;
+        let nextIndex = (index + 1) % images.length;
+
+        // Fade out the current image
+        images[currentIndex].style.opacity = 0;
+
+        // set a timeout to fade in the next image after the fade animation completes
+        setTimeout(function() {
+            // hide the current image
+            images[currentIndex].classList.remove('active');
+            // show the next image
+            images[nextIndex].classList.add('active');
+            images[nextIndex].style.opacity = 1;
+            // update the index for the next iteration
+            index = nextIndex;
+        }, fadeDuration);
     }
 
-    setInterval(showImage, 3000); // Change image every 3 seconds
+    // Show the first image
+    images[index].classList.add('active');
+    images[index].style.opacity = 1;
+
+    // transition loop
+    setInterval(showImage, 4000); // Change image every 4 seconds
 });
+
 
 // function to disable the "Continue" button if no option is selected
 function selectMovie() {
