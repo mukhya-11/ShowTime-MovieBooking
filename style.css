@@ -85,7 +85,7 @@ h2 {
     text-align: center;
     font-size: 30px;
     font-weight: 300;
-    animation: glow 5s 750ms linear infinite;
+    animation: glow 5s linear infinite;
   }
 
 @keyframes glow {
