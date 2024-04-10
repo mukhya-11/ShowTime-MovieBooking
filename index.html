@@ -10,16 +10,21 @@
 <body>
     <div id="background"></div>
     <h1><span>Show</span><span>Time!</span></h1>
+
 <div id="allTogether">
     <h2>Now Premiering/Ongoing</h2>
 
-    <div id="imgContainer" class="gallery">
-        <img src="pics/SwordArtOnline.jpg">
-        <img src="pics/Interstellar.jpg">
-        <img src="pics/KungFuPanda4.jpg">
-        <img src="pics/GraveOfTheFireflies.jpg">
-        <img src="pics/BladeRunner.jpg">
-        <img src="pics/Oppenheimer.jpg">
+    <div class="slider">
+         <div class="slides">
+            <img id="gallery" class="slide" src="pics/BladeRunner.jpg">
+            <img id="gallery" class="slide" src="pics/SwordArtOnline.jpg">
+            <img id="gallery" class="slide" src="pics/Oppenheimer.jpg">
+            <img id="gallery" class="slide" src="pics/KungFuPanda4.jpg">
+            <img id="gallery" class="slide" src="pics/GraveOfTheFireflies.jpg">
+            <img id="gallery" class="slide" src="pics/Interstellar.jpg">
+         </div>
+         <button class="prevBtn" onclick="prevSlide()">&#10094</button> <!-- left arrow button-->
+         <button class="nextBtn" onclick="nextSlide()">&#10095</button> <!-- right arrow button-->
     </div>
 
     <div id="select">

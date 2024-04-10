@@ -1,36 +1,41 @@
 // image animation
-document.addEventListener('DOMContentLoaded', function() {
-    let images = document.querySelectorAll('.gallery img');
-    let index = 0;
-    let fadeDuration = 300; // Duration of fade animation in ms
+const slides = document.querySelectorAll(".slides img");
+let slideIndex = 0;
+let intervalId = null;
 
-    function showImage() {
-        let currentIndex = index;
-        let nextIndex = (index + 1) % images.length;
+document.addEventListener("DOMContentLoaded" ,initializeSlider); // calling the fn after the DOM content fully loads
+function initializeSlider(){ //for the first image 
 
-        // Fade out the current image
-        images[currentIndex].style.opacity = 0;
+    slides[slideIndex].classList.add("displaySlide");
+    intervalId = setInterval(nextSlide, 5000); //goes to the next img every 5secs
+}
 
-        // set a timeout to fade in the next image after the fade animation completes
-        setTimeout(function() {
-            // hide the current image
-            images[currentIndex].classList.remove('active');
-            // show the next image
-            images[nextIndex].classList.add('active');
-            images[nextIndex].style.opacity = 1;
-            // update the index for the next iteration
-            index = nextIndex;
-        }, fadeDuration);
+
+function showSlide(index){
+    if(index >= slides.length){ // to reset after it reaches the end image
+        slideIndex = 0;
+    }
+    else if(index < 0){
+        slideIndex = slides.length - 1; // if prev button is pressed on slide 1 it will display the end slide
     }
 
-    // Show the first image
-    images[index].classList.add('active');
-    images[index].style.opacity = 1;
+    slides.forEach(slide => {
+        slide.classList.remove("displaySlide"); // won't display as a block
+    });
+    slides[slideIndex].classList.add("displaySlide"); // will display as a block
+}
 
-    // transition loop
-    setInterval(showImage, 4000); // Change image every 4 seconds
-});
 
+function prevSlide(){
+    slideIndex--;
+    showSlide(slideIndex);
+}
+
+
+function nextSlide(){
+    slideIndex++;
+    showSlide(slideIndex);
+}
 
 // function to disable the "Continue" button if no option is selected
 function selectMovie() {
