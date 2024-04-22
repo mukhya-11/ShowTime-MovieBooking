@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/webp" href="pics/logo.png"> <!--This line displays a website logo-->
+
+    <title>ShowTime!</title>
+
+<style>
+  body{
+    background-color: black;
+    padding: 20px;
+}
+
+  #background{
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    filter: blur(10px);
+    background-image: url('pics/background.jpg');
+    background-size: cover; /* ensures the background image covers the entire container */
+    background-position: center; /* centers the background image */
+}
+  
+  #allTogether{
+    background: linear-gradient(135deg, hsl(230, 40%, 12%), hsl(230, 20%, 7%));
+    margin: auto;
+    border: 5px;
+    border-style: double;
+    border-color: blueviolet;
+    width: 1200px;
+    height: 700px;
+}
+
+  h1 {
+    font-family: "Luckiest Guy", cursive;
+    margin: 0;
+    font-size: 4em;
+    margin-bottom: 23px;
+    text-align: center;
+    color: rgb(221, 231, 229);
+    span {
+      transform: scale(0.9);
+      display: inline-block;
+    }
+    span:first-child {
+      animation: enlarge 1s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards infinite alternate;
+    }
+    span:last-child {
+      animation: enlarge2 1s 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards infinite alternate;
+    }
+}
+
+  @keyframes enlarge {
+    0% {
+      transform: scale(0.9);
+    }
+    50%,
+    100% {
+      transform: scale(1);
+    }
+}
+
+  @keyframes enlarge2 {
+    0% {
+      transform: scale(0.9);
+    }
+    80%,
+    100% {
+      transform: scale(1) rotateZ(-3deg);
+    }
+}
+
+h2 {
+  text-align: center;
+  font-size: 30px;
+  font-weight: 300;
+  animation: glow 5s linear infinite;
+}
+
+@keyframes glow {
+  0% {
+    color: hsl(230, 40%, 80%);
+    text-shadow:
+      0 0 1em hsla(320, 100%, 50%, 0.2),
+      0 0 0.125em hsla(320, 100%, 60%, 0.3),
+      -1em -0.125em 0.5em hsla(40, 100%, 60%, 0),
+      1em 0.125em 0.5em hsla(200, 100%, 60%, 0);
+  }
+  
+  30% { 
+    color: hsl(230, 80%, 90%);
+    text-shadow:
+      0 0 1em hsla(320, 100%, 50%, 0.5),
+      0 0 0.125em hsla(320, 100%, 60%, 0.5),
+      -0.5em -0.125em 0.25em hsla(40, 100%, 60%, 0.2),
+      0.5em 0.125em 0.25em hsla(200, 100%, 60%, 0.4);
+  }
+  
+  40% { 
+    color: hsl(230, 100%, 95%);
+    text-shadow:
+      0 0 1em hsla(320, 100%, 50%, 0.5),
+      0 0 0.125em hsla(320, 100%, 90%, 0.5),
+      -0.25em -0.125em 0.125em hsla(40, 100%, 60%, 0.2),
+      0.25em 0.125em 0.125em hsla(200, 100%, 60%, 0.4);
+  }
+  
+  70% {
+    color: hsl(230, 80%, 90%);
+    text-shadow:
+      0 0 1em hsla(320, 100%, 50%, 0.5),
+      0 0 0.125em hsla(320, 100%, 60%, 0.5),
+      0.5em -0.125em 0.25em hsla(40, 100%, 60%, 0.2),
+      -0.5em 0.125em 0.25em hsla(200, 100%, 60%, 0.4);
+  }
+  
+  100% {
+    color: hsl(230, 40%, 80%);
+    text-shadow:
+      0 0 1em hsla(320, 100%, 50%, 0.2),
+      0 0 0.125em hsla(320, 100%, 60%, 0.3),
+      1em -0.125em 0.5em hsla(40, 100%, 60%, 0),
+      -1em 0.125em 0.5em hsla(200, 100%, 60%, 0);
+  }
+  
+}
+
+  #container {
+    width: 400px;
+    height: 500px;
+    margin-left: 5%;
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    overflow: hidden;
+    padding: 10px; /* Add padding to ensure equal margin space */
+    }
+
+  #screen {
+    width: 100%;
+    height: 60px;
+    background-color: #463968;
+    color: white;
+    text-align: center;
+    line-height: 65px;
+    font-size: 30px;
+    margin-bottom: 13px;
+    }
+
+  .seat {
+    width: 56px;
+    height: 60px;
+    background-color: #1dbac2;
+    border-radius: 30px;
+    display: inline-block;
+    margin: 5px;
+    cursor: pointer;
+    text-align: center;
+    line-height: 60px;
+    font-size: 1.2rem;
+    }
+
+  .seat.selected {
+    background-color: #8f4122;
+    }
+
+  #form {
+    margin-left: 60%; 
+    margin-top: -360px;
+    }
+
+  #form input[type="text"],
+  #form input[type="number"],
+  #form input[type="date"]
+   {
+    display: flex;
+    flex-direction: column;
+    width: 200px;
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    }
+
+  #confirmBtn {
+    padding: 10px 20px;
+    background-color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 15%;
+    margin-left: 46%;
+    font-size: 1rem;
+    }
+
+  #confirmBtn:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+    }
+
+  #totalPrice {
+    margin-top: 10px;
+    font-weight: bold;
+    }
+    
+</style>
+
+<body>
+    <div id="background"></div>
+    <h1><span>Show</span><span>Time!</span></h1>
+
+<div id="allTogether">
+    <h2>Please select your seats</h2>
+    <div id="container">
+        <div id="screen">SCREEN</div>
+    
+        <div id="seats">
+            <!-- Generate seats dynamically using JavaScript -->
+        </div>
+    </div>    
+    <div id="form">
+        <form id="bookingForm">
+            <label for="name" style="color: aliceblue; font-size: 15px;">Full Name:</label>
+            <input type="text" id="name" placeholder="Enter your name (more than 5 characters)"><br>
+            <label for="phone" style="color: aliceblue; font-size: 15px;">Ph. No:</label>
+            <input type="number" id="phone" placeholder="Enter your phone number (10 digits)"><br>
+            <label for="date" style="color: aliceblue; font-size: 15px;">Select Date:</label>
+            <input type="date" id="date">
+        </form>
+        <div id="totalPrice" style="color: aliceblue; font-size: 1rem;">Total:  ₹<span id="totalAmount">0</span></div>
+    </div>
+    <button id="confirmBtn" type="submit" disabled>Confirm</button>
+
+</div>
+
+
+<script>
+ // JavaScript code to generate seat buttons dynamically
+const seatContainer = document.getElementById('seats');
+const selectedSeats = [];
+let totalPrice = 0; // Add a variable to store the total price
+
+// Generate seat buttons
+for (let row = 0; row < 3; row++) {
+    for (let col = 1; col <= 12; col++) {
+        const seat = document.createElement('div');
+        seat.className = 'seat';
+        const seatNumber = String.fromCharCode(97 + row) + col;
+        seat.textContent = seatNumber;
+        seatContainer.appendChild(seat);
+    }
+}
+
+// Add event listener to each seat
+const seats = document.querySelectorAll('.seat');
+seats.forEach(seat => {
+    seat.addEventListener('click', () => {
+        seat.classList.toggle('selected');
+        const seatNumber = seat.textContent;
+        const seatType = seatNumber.charAt(0).toLowerCase();
+        const seatPrice = getSeatPrice(seatType);
+        if (seat.classList.contains('selected')) {
+            selectedSeats.push(seatNumber);
+            totalPrice += seatPrice;
+        } else {
+            const index = selectedSeats.indexOf(seatNumber);
+            if (index !== -1) {
+                selectedSeats.splice(index, 1);
+            }
+            totalPrice -= seatPrice;
+        }
+        updateTotalPrice(); // Update total price display
+        checkFormValidity();
+    });
+});
+
+// Function to get the price of a seat based on its type
+function getSeatPrice(seatType) {
+    const prices = {
+        a: 200,
+        b: 300,
+        c: 500
+    };
+    return prices[seatType] || 0; // Default to 0 if seat type is not found
+}
+
+// Update total price display
+function updateTotalPrice() {
+    const totalPriceElement = document.getElementById('totalAmount');
+    totalPriceElement.textContent = totalPrice;
+}
+
+// Form validation
+const form = document.getElementById('bookingForm');
+const nameInput = document.getElementById('name');
+const dateInput = document.getElementById('date');
+const phoneInput = document.getElementById('phone');
+const confirmButton = document.getElementById('confirmBtn');
+
+nameInput.addEventListener('input', checkFormValidity);
+phoneInput.addEventListener('input', checkFormValidity);
+dateInput.addEventListener('input', checkFormValidity);
+
+// Using the 'change' event for the date input
+dateInput.addEventListener('change', checkFormValidity);
+
+function checkFormValidity() {
+    const name = nameInput.value.trim();
+    const phone = phoneInput.value.trim();
+    const date = dateInput.value.trim();
+    const isNameValid = name.length > 5;
+    const isPhoneValid = /^\d{10}$/.test(phone);
+    const isDateValid = date !== ''; // Check if the date input is not empty
+    confirmButton.disabled = !isNameValid || !isPhoneValid || !isDateValid || totalPrice === 0;
+}
+
+confirmButton.addEventListener('click', function(event) {
+    event.preventDefault();
+    const date = dateInput.value.trim();
+    const name = nameInput.value.trim();
+    const phone = phoneInput.value.trim();
+    console.log('Date:', date);
+    console.log('Name:', name);
+    console.log('Phone:', phone);
+    console.log('Total: ₹', totalPrice);
+    console.log('Selected seats:', selectedSeats.join(', '));
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+    const storedMovie = sessionStorage.getItem('selectedMovie');
+    if (storedMovie) {
+        console.log('Movie:', storedMovie);
+    } else {
+        console.log('No movie selected from Index 1');
+    }
+});
+
+</script>
+
+</body>
+</html>
