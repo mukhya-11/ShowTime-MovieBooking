@@ -191,8 +191,10 @@ h2 {
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    margin-top: 15%;
-    margin-left: 46%;
+    position: absolute;
+    bottom: -80px;
+    left: 50%;
+    transform: translateX(-50%);
     font-size: 1rem;
     }
 
@@ -206,6 +208,87 @@ h2 {
     font-weight: bold;
     }
     
+  .popup {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* Centers the element horizontally and vertically */
+    background-color: black;
+    padding: 20px;
+    border: 2px solid thistle;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+    z-index: 1;
+    width: 500px;
+    height: 500px;
+    }
+
+  .popup video {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 130px; 
+    max-width: 100%;
+    max-height: 100%;
+    }
+
+  #p1 {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 1.3rem;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    color: whitesmoke;
+    animation-name: fade;
+    animation-duration: 1.5s;
+    }
+
+  #homeButton {
+    position: absolute;
+    top: 80%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 1rem;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    padding: 7px;
+    color: black;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: azure;
+    animation: fade 3s;
+  }
+
+  #homeButton:hover{
+    background-color: rgba(240, 255, 255, 0.783);
+  }
+
+  @keyframes fade {
+   from {opacity: 0}
+   to {opacity: 1}
+  }
+
+  #floating-line{
+    position: absolute;
+    top: 83%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: whitesmoke;
+    font-family:  "Lucida Sans Unicode", "Lucida Grande", sans-serif;;
+    font-weight: 400;
+    font-size: 15px;
+    font-variant: small-caps;
+    animation: fadeIn 3s linear infinite; /* Fade in and out for 4 seconds, repeat infinitely */
+  }
+
+  @keyframes fadeIn {
+   0% { opacity: 0; } /* Start with opacity 0 */
+   50% { opacity: 1; } /* Peak opacity */
+   100% { opacity: 0; } /* End with opacity 0 */
+  }
+
 </style>
 
 <body>
@@ -213,7 +296,7 @@ h2 {
     <h1><span>Show</span><span>Time!</span></h1>
 
 <div id="allTogether">
-    <h2>Please select your seats</h2>
+    <h2>Please choose your seat!</h2>
     <div id="container">
         <div id="screen">SCREEN</div>
     
@@ -235,6 +318,14 @@ h2 {
     <button id="confirmBtn" type="submit" disabled>Confirm</button>
 
 </div>
+
+<!-- Popup Container -->
+  <div id="popup" class="popup">
+      <video src="pics/green tick.mp4" autoplay muted></video>
+      <p id="p1">Booking Complete!</p>
+      <a href="index.html"><button id="homeButton">Return Home</button></a>
+      <p id="floating-line">click here to return to home page</p>
+  </div>
 
 
 <script>
@@ -337,6 +428,21 @@ document.addEventListener('DOMContentLoaded', function() {
         console.log('No movie selected from Index 1');
     }
 });
+
+//Popup window
+const popup = document.getElementById('popup');
+// Function to display the popup
+function displayPopup() {
+    popup.style.display = 'block';
+}
+
+// Function to close the popup
+function closePopup() {
+    popup.style.display = 'none';
+}
+
+// Event listener for the confirm button
+confirmBtn.addEventListener('click', displayPopup);
 
 </script>
 
