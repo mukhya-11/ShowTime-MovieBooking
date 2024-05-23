@@ -3,76 +3,82 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/webp" href="pics/logo.png"> <!--This line displays a website logo-->
-
+    <link rel="icon" type="image/webp" href="pics/logo.png"> <!--displays the website logo-->
     <title>ShowTime!</title>
-    <link rel="stylesheet" href="style2.css">
-    
+    <link rel="stylesheet" href="style.css">
 <body>
-    <div id="background"></div>
+    <div id="background">
+        <video autoplay muted loop>
+            <source src="pics/video.mp4" type="video/mp4">
+        </video>
+    </div>  
     <h1><span>Show</span><span>Time!</span></h1>
 
 <div id="allTogether">
   <h2 id="heading1" style="display: none; text-align: center;">Please choose your seat!</h2>
     <div id="seatSelection" style="display: none;">
-        <div id="screen">SCREEN</div>
-    
+        <div id="screen">SCREEN</div> 
         <div id="seats">
             <!-- Generate seats dynamically using JavaScript -->
         </div>
         <div id="totalPrice" style="color: aliceblue; font-size: 1rem;
         position: absolute; cursor: pointer; left: 39%; bottom: -6%;
         transform: translateX(-50%);">Total:  ₹<span id="totalAmount">0</span></div> 
-
         <button id="confirmBtn" type="submit" disabled style="left: 50%; bottom: -11%;
         transform: translateX(-50%);">Confirm</button>
-    </div>    
-    
+    </div>      
     <div id="form">
-    <h2 id="heading2" style="left: 90%; transform: translateX(-7%);">Please fillup your details!</h2>
-        <form id="bookingForm">
-            <label for="name" style="color: aliceblue; font-size: 18px;">Full Name:</label>
-            <input type="text" id="name" placeholder="Enter your name (more than 5 characters)"><br>
-            <label for="phone" style="color: aliceblue; font-size: 18px;">Ph. No:</label>
-            <input type="number" id="phone" placeholder="Enter your phone number (10 digits)"><br>
-            <label for="date" style="color: aliceblue; font-size: 18px;">Select Date:</label>
-            <input type="date" id="date">
-        </form> <br>
+    <h2 id="heading2" style="left: 90%; transform: translateX(-12%);">
+        Please fillup your details!
+    </h2><br>
+    <form id="bookingForm" action="submit_booking.php" method="POST">
+        <label for="name" style="color: aliceblue; font-size: 18px;">Full Name:</label>
+        <input type="text" id="name" name="name" placeholder="Eg: Alice Blue"><br>
+        <label for="phone" style="color: aliceblue; font-size: 18px;">Ph. No:</label>
+        <input type="number" id="phone" name="phone" placeholder="10 digit number"><br>
+        <label for="date" style="color: aliceblue; font-size: 18px;">Select Date:</label>
+        <input type="date" id="date" name="date"><br>
         <label for="selectTime" style="color: aliceblue; font-size: 18px;">Select Time:</label>
-        <select id="selectTime">
-          <option value="" disabled selected>-  -  -  -  -</option>
-          <option value="11:00 am">11:00 am</option>
-          <option value="2:00 pm">2:00 pm</option>
-          <option value="5:00 pm">5:00 pm</option>
-          <option value="7:00 pm">7:00 pm</option>
+        <select id="selectTime" name="time" style="width: 212px;">
+            <option value="" disabled selected>-  -  -  -  -</option>
+            <option value="11:00 am">11:00 am</option>
+            <option value="2:00 pm">2:00 pm</option>
+            <option value="5:00 pm">5:00 pm</option>
+            <option value="7:00 pm">7:00 pm</option>
         </select>
-        <button id="submitFormBtn" style="left: 50%; bottom: 14%;
-        transform: translateX(-50%);">Submit</button>
-    </div>
-   
+        <input type="hidden" id="selectedMovie" name="movie">
+        <input type="hidden" id="selectedSeats" name="seats">
+        <input type="hidden" id="hiddenTotalPrice" name="total_price">
+        <button id="submitFormBtn" type="submit" style="left: 50%; bottom: 11%;
+            transform: translateX(-50%);">Submit</button>
+    </form>    
+    </div>   
 </div>
-
 <!-- Popup Container -->
   <div id="popup" class="popup">
       <video src="pics/green tick.mp4" autoplay muted></video>
       <p id="p1">Booking Complete!</p>
       <a href="index.html"><p id="floating-line">click here to return to home page</p></a>
   </div>
-
-
-<script>
-// Immediately invoke checkFormValidity when the DOM content is loaded
+  
+  <script>
+ // Immediately invoke checkFormValidity when the DOM content is loaded
 document.addEventListener('DOMContentLoaded', function() {
     checkFormValidity(); // Check form validity when the page loads
     submitFormBtn.disabled = true; // Disable submit button by default
+    const movie = sessionStorage.getItem('selectedMovie');
+    const date = dateInput.value.trim();
+    const time = selectTimeInput.value;
+    // Check and mark booked seats
+    checkBookedSeats(movie, date, time);
 });
 
-// event listener to the form submit button
-const submitFormBtn = document.getElementById('submitFormBtn');
-submitFormBtn.addEventListener('click', function(event) {
+// Event listener to the form submit button
+    const submitFormBtn = document.getElementById('submitFormBtn');
+    submitFormBtn.addEventListener('click', function(event) {
     event.preventDefault(); // Prevent the default form submission behavior
 
-    // Show the seat selection elements
+// Show the seat selection elements
     const heading = document.getElementById('heading1');
     heading.style.display = 'block';
     const seatSelectionDiv = document.getElementById('seatSelection');
@@ -81,14 +87,18 @@ submitFormBtn.addEventListener('click', function(event) {
     // Hide the form
     const formDiv = document.getElementById('form');
     formDiv.style.display = 'none';
+    
+    const movie = sessionStorage.getItem('selectedMovie');
+    const date = dateInput.value.trim();
+    const time = selectTimeInput.value;
+    // Check and mark booked seats
+    checkBookedSeats(movie, date, time);
 });
 
-
- // JavaScript code to generate seat buttons dynamically
-const seatContainer = document.getElementById('seats');
-const selectedSeats = [];
-let totalPrice = 0; // Add a variable to store the total price
-
+// JavaScript code to generate seat buttons dynamically
+    const seatContainer = document.getElementById('seats');
+    const selectedSeats = [];
+    let totalPrice = 0; // Add a variable to store the total price
 // Generate seat buttons
 for (let row = 0; row < 3; row++) {
     for (let col = 1; col <= 12; col++) {
@@ -103,25 +113,33 @@ for (let row = 0; row < 3; row++) {
 // Add event listener to each seat
 const seats = document.querySelectorAll('.seat');
 seats.forEach(seat => {
-    seat.addEventListener('click', () => {
-        seat.classList.toggle('selected');
-        const seatNumber = seat.textContent;
-        const seatType = seatNumber.charAt(0).toLowerCase();
-        const seatPrice = getSeatPrice(seatType);
-        if (seat.classList.contains('selected')) {
-            selectedSeats.push(seatNumber);
-            totalPrice += seatPrice;
-        } else {
-            const index = selectedSeats.indexOf(seatNumber);
-            if (index !== -1) {
-                selectedSeats.splice(index, 1);
-            }
-            totalPrice -= seatPrice;
-        }
-        updateTotalPrice(); // Update total price display
-        checkFormValidity();
-    });
+    seat.addEventListener('click', toggleSeatSelection);
 });
+
+// Function to toggle seat selection
+function toggleSeatSelection(event) {
+    const seat = event.target;
+    if (seat.classList.contains('booked')) {
+        return; // Prevent selection of booked seats
+    }
+    seat.classList.toggle('selected');
+    const seatNumber = seat.textContent;
+    const seatType = seatNumber.charAt(0).toLowerCase();
+    const seatPrice = getSeatPrice(seatType);
+    
+    if (seat.classList.contains('selected')) {
+        selectedSeats.push(seatNumber);
+        totalPrice += seatPrice;
+    } else {
+        const index = selectedSeats.indexOf(seatNumber);
+        if (index !== -1) {
+            selectedSeats.splice(index, 1);
+        }
+        totalPrice -= seatPrice;
+    }
+    updateTotalPrice();
+    checkFormValidity();
+}
 
 // Function to get the price of a seat based on its type
 function getSeatPrice(seatType) {
@@ -155,7 +173,7 @@ selectTimeInput.addEventListener('change', checkFormValidity);
 // Using the 'change' event for the date input
 dateInput.addEventListener('change', checkFormValidity);
 
-//current date adjusted for the local time zone offset
+// current date adjusted for the local time zone offset
 const currentDate = new Date();
 const localOffset = currentDate.getTimezoneOffset() * 60000; // Offset in milliseconds
 const adjustedDate = new Date(currentDate.getTime() - localOffset);
@@ -181,21 +199,64 @@ function checkFormValidity() {
     submitFormBtn.disabled = !isNameValid || !isPhoneValid || !isDateValid || selectTime === '';
 }
 
+// Function to save booking to localStorage
+function saveBooking(movie, date, time, seats) {
+    const bookings = JSON.parse(localStorage.getItem('bookings')) || [];
+    bookings.push({ movie, date, time, seats });
+    localStorage.setItem('bookings', JSON.stringify(bookings));
+}
+
 confirmButton.addEventListener('click', function(event) {
     event.preventDefault();
     confirmButton.disabled = true; // Disable the button to prevent multiple submissions
+
+    const movie = sessionStorage.getItem('selectedMovie');
     const date = dateInput.value.trim();
-    const name = nameInput.value.trim();
-    const phone = phoneInput.value.trim();
     const selectTime = selectTimeInput.value;
-    console.log('Date:', date);
-    console.log('Name:', name);
-    console.log('Phone:', phone);
-    console.log('Total: ₹', totalPrice);
-    console.log('Selected seats:', selectedSeats.join(', '));
-    console.log('Time:', selectTime);
+
+    // Fill-up hidden inputs
+    document.getElementById('selectedMovie').value = movie;
+    document.getElementById('selectedSeats').value = selectedSeats.join(', ');
+    document.getElementById('hiddenTotalPrice').value = totalPrice.toFixed(2);
+
+    // Save the booking
+    saveBooking(movie, date, selectTime, selectedSeats);
+
+    // Send form data to the server without reloading the page
+    const formData = new FormData(form);
+    fetch('submit_booking.php', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.text())
+    .then(data => {
+        console.log(data); // Handle server response if needed
+        // Display the popup or a success message
+        displayPopup();
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
 });
 
+// Function to check booked seats
+function checkBookedSeats(movie, date, time) {
+    const bookings = JSON.parse(localStorage.getItem('bookings')) || [];
+    const bookedSeats = bookings
+        .filter(booking => booking.movie === movie && booking.date === date && booking.time === time)
+        .flatMap(booking => booking.seats);
+
+    bookedSeats.forEach(seatNumber => {
+        const seat = Array.from(seats).find(s => s.textContent === seatNumber);
+        if (seat) {
+            seat.classList.add('booked');
+            //seat.style.backgroundColor = 'darkred';
+            seat.removeEventListener('click', toggleSeatSelection);
+        }
+    });
+}
+
+// To check if the movie data was fetched or not
 document.addEventListener('DOMContentLoaded', function() {
     const storedMovie = sessionStorage.getItem('selectedMovie');
     if (storedMovie) {
@@ -205,7 +266,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
-//Popup window
+// Popup window
 const popup = document.getElementById('popup');
 // Function to display the popup
 function displayPopup() {
@@ -220,6 +281,5 @@ function closePopup() {
 // Event listener for the confirm button
 confirmBtn.addEventListener('click', displayPopup);
 </script>
-
 </body>
 </html>

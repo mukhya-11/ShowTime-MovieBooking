@@ -2,22 +2,9 @@ body{
   background-color: black;
   padding: 20px;
 }
-
-#background{
-  width: 100%;
-  height: 100%;
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: -1;
-  filter: blur(10px);
-  background-image: url('pics/background.jpg');
-  background-size: cover; /* ensures the background image covers the entire container */
-  background-position: center; /* centers the background image */
-}
   
 #allTogether{
-  background: linear-gradient(135deg, hsl(230, 40%, 12%), hsl(230, 20%, 7%));
+  background: hsla(212, 100%, 3%, 0.128);
   margin: auto;
   border: 5px;
   border-style: double;
@@ -26,6 +13,23 @@ body{
   height: 700px;
 }
 
+#background {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  filter: blur(10px);
+  object-fit: cover;
+  background-color: black; /* Fallback color in case the video doesn't load */
+}
+
+#background video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
 
 /*-------------------------------IMAGES-------------------------------*/
 .slider{
@@ -34,7 +38,7 @@ width: 100%;
 margin: auto; /* to center everything horizontally */
 overflow: hidden; /* just in case our images are too big */
 height: 500px; /* Fixed height for the container */
-background-color: #222; /* Placeholder background color while images load */
+background-color: hsla(212, 100%, 3%, 0.128); /* Placeholder background color while images load */
 }
 
 .slider img{
@@ -61,7 +65,6 @@ height: 500px;
 from {opacity: .5}
 to {opacity: 1}
 }
-
 
 /*-------------------------------BUTTONS-------------------------------*/
 .slider button{
@@ -108,9 +111,34 @@ select{
   color: black; /* font color */
 }
 
+#confirmBtn, #submitFormBtn{
+  padding: 10px 20px;
+  background-color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  position: absolute;
+  bottom: 85px;
+  font-size: 1rem;
+  }
+
+#confirmBtn:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+  }
+
+#submitFormBtn:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  } 
+
+#continueBtn:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }  
+
 /*-------------------------------Headings & animations-------------------------------*/
 h2 {
-  text-align: center;
   font-size: 30px;
   font-weight: 300;
   animation: glow 5s linear infinite;
@@ -204,3 +232,131 @@ h1 {
     transform: scale(1) rotateZ(-3deg);
   }
 }
+
+#p1 {
+  position: absolute;
+  top: 53%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 1.3rem;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  color: whitesmoke;
+  animation-name: fade;
+  animation-duration: 1.5s;
+  }
+
+@keyframes fade {
+ from {opacity: 0}
+ to {opacity: 1}
+}
+
+#floating-line{
+  position: absolute;
+  top: 83%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: whitesmoke;
+  font-family:  "Lucida Sans Unicode", "Lucida Grande", sans-serif;;
+  font-weight: 400;
+  font-size: 15px;
+  font-variant: small-caps;
+  cursor: pointer;
+  animation: fadeIn 3s linear infinite; /* Fade in and out for 4 seconds, repeat infinitely */
+}
+
+@keyframes fadeIn {
+ 0% { opacity: 0; } /* Start with opacity 0 */
+ 50% { opacity: 1; } /* Peak opacity */
+ 100% { opacity: 0; } /* End with opacity 0 */
+}
+
+/*-------------------------------PopUp Window-------------------------------*/
+.popup {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); /* Centers the element horizontally and vertically */
+  background-color: black;
+  padding: 20px;
+  border: 2px solid thistle;
+  border-radius: 5px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+  z-index: 1;
+  width: 500px;
+  height: 500px;
+  }
+
+.popup video {
+  position: absolute;
+  top: 43%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 130px; 
+  max-width: 100%;
+  max-height: 100%;
+  }
+
+/*-------------------------------Form Submission-------------------------------*/
+#form {
+  padding-top: 90px;
+  margin-left: 33%; 
+  margin-top: -1px;
+  }
+
+#form input[type="text"],
+#form input[type="number"],
+#form input[type="date"],
+#selectTime
+ {
+  display: flex;
+  flex-direction: column;
+  width: 200px;
+  padding: 5px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  }
+
+/*-------------------------------SeatSelection Window-------------------------------*/
+#seatSelection {
+  width: 400px;
+  height: 500px;
+  margin-left: 14%;
+  border: 2px solid #ccc;
+  border-radius: 10px;
+  overflow: hidden;
+  padding: 10px; /* Add padding to ensure equal margin space */
+  }
+
+#screen {
+  width: 100%;
+  height: 60px;
+  background-color: #463968;
+  color: white;
+  text-align: center;
+  line-height: 65px;
+  font-size: 30px;
+  margin-bottom: 13px;
+  }
+
+.seat {
+  width: 56px;
+  height: 60px;
+  background-color: #1dbac2;
+  border-radius: 30px;
+  display: inline-block;
+  margin: 5px;
+  cursor: pointer;
+  text-align: center;
+  line-height: 60px;
+  font-size: 1.2rem;
+  }
+
+.seat.selected {
+  background-color: #66a23b ;
+  }
+
+.seat.booked {
+  background-color: darkred;
+  cursor: not-allowed; /* Change cursor to a warning sign */
+  }
