@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/webp" href="pics/logo.png"> <!--This line displays a website logo-->
-
+    <link rel="icon" type="image/webp" href="pics/logo.png"> <!--displays the website logo-->
     <title>ShowTime!</title>
     <link rel="stylesheet" href="style.css">
 <body>
@@ -17,7 +16,6 @@
 
 <div id="allTogether">
     <h2 style="text-align: center;">Now Premiering/Ongoing</h2>
-
     <div class="slider">
          <div class="slides">
             <img id="gallery" class="slide" src="pics/BladeRunner.jpg">
@@ -55,15 +53,14 @@ const slides = document.querySelectorAll(".slides img");
 let slideIndex = 0;
 let intervalId = null;
 
-document.addEventListener("DOMContentLoaded" ,initializeSlider); // calling the fn after the DOM content fully loads
-
+// calling the fn after the DOM content fully loads
+document.addEventListener("DOMContentLoaded" ,initializeSlider);
 function initializeSlider(){ //for the first image 
     if(slides.length > 0){
         slides[slideIndex].classList.add("displaySlide");
         intervalId = setInterval(nextSlide, 5000); //goes to the next img every 5secs
     }
 }
-
 
 function showSlide(index){
     if(index >= slides.length){ // to reset after it reaches the end image
@@ -72,7 +69,6 @@ function showSlide(index){
     else if(index < 0){
         slideIndex = slides.length - 1; // if prev button is pressed on slide 1 it will display the end slide
     }
-
     slides.forEach(slide => {
         slide.classList.remove("displaySlide"); // won't display as a block
     });
@@ -83,7 +79,6 @@ function prevSlide(){
     slideIndex--;
     showSlide(slideIndex);
 }
-
 
 function nextSlide(){
     slideIndex++;
@@ -101,7 +96,7 @@ function selectMovie() {
     // Change button color when a movie is selected
     continueButton.style.backgroundColor = selectBox.value === "" ? "" : "azure";
 
-// function to store the selected movie name for the next page
+    // to store the selected movie name for the next page
     const selectElement = document.getElementById('selectMovie');
     const selectedValue = selectElement.value;
     sessionStorage.setItem('selectedMovie', selectedValue); // Store selected value in sessionStorage
