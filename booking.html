@@ -207,6 +207,7 @@ dateInput.max = futureDate.toISOString().split('T')[0]; // Set maximum date to 4
 // Set default value to current date
 dateInput.value = adjustedDate.toISOString().split('T')[0];
 
+// Function to disable confirm & submitBtn if formValidity fails
 function checkFormValidity() {
     const name = nameInput.value.trim();
     const phone = phoneInput.value.trim();
