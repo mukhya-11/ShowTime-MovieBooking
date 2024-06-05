@@ -1,2 +1,20 @@
-# ShowTime-MovieBooking
-'ShowTime!' - an online movie booking platform developed as my semester project. Demonstrates web technologies for real-time movie selection, seat booking, and user management.
+# Movie Seat Booking Website
+
+This project is a Movie Seat Booking Website, designed to facilitate the booking of movie tickets through a web interface. Users can select movies, choose showtimes, and pick their seats from an interactive layout.
+
+## Features
+- Form validation for user details
+- Select a movie and showtime
+- Choose seats from an interactive layout
+- Local storage to save previously booked seats based on the movie, date, and time
+
+## How to Use
+1. Open the website in your browser.
+2. Select a movie from the available options.
+3. Fill in your details, choose a date and showtime and submit the form.
+4. Pick & confirm your seats from the interactive seat map.
+5. To reset the booking data, clear your browser's local storage or history.
+
+## Notes
+- The website uses local storage to save previously booked seats based on the movie, date, and time, simulating real-time seat updates.
+- To store user entries, you can create a table by copying the code in `database.sql`. The website's local storage functionality will still work without it.
