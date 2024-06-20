@@ -18,3 +18,7 @@ This project is a Movie Seat Booking Website, designed to facilitate the booking
 ## Notes
 - The website uses local storage to save previously booked seats based on the movie, date, and time, simulating real-time seat updates.
 - To store user entries, you can create a table by copying the code in `database.sql`. The website's local storage functionality will still work without it.
+
+## Disclaimer
+
+**ShowTime!** is a student project created for educational purposes. This project is not affiliated with, endorsed by, or associated with any other entities, products, or services using the name "ShowTime", including but not limited to any video players, streaming services, or entertainment platforms. The use of the name "ShowTime!" in this context is purely coincidental and is intended solely for a non-commercial, academic project.
